@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {%load static %}
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>IES Consultores</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        <!-- Font Awesome-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-5">
+                <a class="navbar-brand" href="{% url 'home' %}">IES Consultores</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'quienesSomos' %}">Quiénes somos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'prensa' %}">Prensa</a></li>
+                    </ul>    
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                          </ul>
+                        <div class="d-flex align-items-center ms-auto">
+                          {% if user.is_authenticated %}
+                            <p style="color:white; margin-right: 10px;"> [{{user.first_name}} {{user.last_name}}]</p>
+                            <div class="text-center">
+                                <a href="{% url 'agregar_avatar' %}"><img src="{{ request.session.avatar }}" height="40px" weight="40px" alt="mi foto" style="margin-right: 10px;"></a>
+                            </div>
+                            <a class="btn btn-secondary" href="{% url 'perfil' %}" style="margin-right: 10px;">Perfil</a>
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Salir</button>
+                            </form>
+                            
+                          {% else %}
+                            <a class="btn btn-warning" href="{% url 'login' %}" style="margin-right: 10px;">Iniciar Sesión</a>
+                            <a class="btn btn-secondary" href="{% url 'registro' %}">Registrarse</a>
+                          {% endif %}
+                        </div>
+                      </div>                              
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-dark py-4">
+            <div class="container px-4">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="text-center my-5">
+                            {% block titulo %}
+                            <h1 class="display-5 fw-bolder text-white mb-2">Investigaciones Económicas Sectoriales</h1>
+                            <p class="lead text-white-50 mb-4">IES una consultora integral formada por economistas y profesionales de diferentes áreas, líderes en la elaboración de estudios económicos sectoriales</p>
+                            {% endblock  %}
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Features section-->
+        {% block contenido %}
+        <section class="py-3 border-bottom" id="features">
+            <div class="container px-5 my-3">
+                <div class="row gx-5">
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="feature bg-warning bg-gradient text-white rounded-3 mb-3"><i class="bi bi-person"></i></div>
+                        <h2 class="h4 fw-bolder">Clientes</h2>
+                        <p>IES busca satisfacer los requerimientos del cliente mediante un trato personalizado, con el objetivo de brindarle un servicio acorde a sus necesidades, a través del conocimiento de la problemática particular de cada sector o empresa.</p>
+                        <a class="text-decoration-none" href="{% url 'clientes' %}">
+                            Ver clientes
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="feature bg-warning bg-gradient text-white rounded-3 mb-3"><i class="bi bi-bar-chart"></i></div>
+                        <h2 class="h4 fw-bolder">Informes Sectoriales</h2>
+                        <p>En IES Consultores analizamos el desempeño de una amplia variedad de sectores que componen la economía real argentina. Realizamos un seguimiento de su actualidad a través de los principales indicadores económicos y establecemos perspectivas sobre su evolución futura..</p>
+                        <a class="text-decoration-none" href="{% url 'informesSectoriales' %}">
+                            Ver informes
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="feature bg-warning bg-gradient text-white rounded-3 mb-3"><i class="bi bi-display"></i></div>
+                        <h2 class="h4 fw-bolder">Monitor Macroeconómico</h2>
+                        <p>El Macroeconómico IES es un producto digital en el cual se analiza el devenir de la macroeconomía argentina, teniendo en cuenta la coyuntura económica global y su impacto a escala local.</p>
+                        <a class="text-decoration-none" href="{% url 'monitor' %}">
+                            Ver Monitor Macro
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% endblock contenido %}
+    
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; Fausto Giorgis 2024</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'js/scripts.js' %}"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>

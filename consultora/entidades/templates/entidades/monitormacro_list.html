@@ -1,0 +1,62 @@
+{% extends 'entidades/index.html' %}
+
+{% block titulo %}
+<h1 class="display-5 fw-bolder text-white mb-2">Monitor Macroeconómico</h1>
+<p class="lead text-white-50 mb-4">En el informe Macroeconómico IES se realiza un análisis integral de los mercados cambiario, financiero y monetario, así como del sector fiscal y de las principales variables reales de la economía. A su vez, se establece un balance y se trazan perspectivas sobre la evolución de la macroeconomía argentina.</p>
+{% endblock titulo %}
+
+{% block contenido %}
+
+<table>
+    <tr>
+        <td width="350"><h3>Agregar Monitor</h3></td> 
+        <td>
+            <a
+            href="{% url 'monitorCreate' %}"
+            class="btn btn-primary btn-sm"
+            ><i class="fa fa-plus fa-lg" title="Crear"> </i>
+            </a>
+        </td>        
+    </tr>
+</table>
+<br> 
+<h2>Monitor Macroeconómicos</h2>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Mes Analizado</th>
+            <th>Fecha Publicacion</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for m in monitormacro_list %}
+        <tr>
+            <td>{{ m.id }}</td>
+            <td>{{ m.nombre }}</td>
+            <td>{{ m.mesAnalizado }}</td>
+            <td>{{ m.fechaPublicacion }}</td>
+            <td>
+                <a
+                  href="{% url 'monitorUpdate' m.id %}"
+                  class="btn btn-primary"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                </a>
+                <a
+                  href="{% url 'monitorDelete' m.id %}"
+                  class="btn btn-danger"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                </a>                
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock contenido %}

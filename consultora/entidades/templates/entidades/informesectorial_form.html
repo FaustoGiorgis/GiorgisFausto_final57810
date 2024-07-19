@@ -1,0 +1,20 @@
+{% extends 'entidades/index.html' %}
+
+{% block titulo %}
+<h1 class="display-5 fw-bolder text-white mb-2">Formulario Informes Sectorials</h1>
+<p class="lead text-white-50 mb-4">Para cargar un nuevo informe, por favor, complete el formulario que se encuetra debajo</p>
+{% endblock titulo %}
+
+{% block contenido %}
+<h2>Agregar informe</h2>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+    <input type="submit" value="Guardar">
+
+</form>
+
+{% endblock contenido %}

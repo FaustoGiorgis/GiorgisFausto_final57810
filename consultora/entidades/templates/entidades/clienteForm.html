@@ -1,0 +1,19 @@
+{% extends 'entidades/index.html' %}
+
+{% block titulo %}
+<h1 class="display-5 fw-bolder text-white mb-2">Formulario Clientes</h1>
+<p class="lead text-white-50 mb-4">Para ingresar en el listado de clientes, por favor, complete el formulario que se encuetra debajo</p>
+{% endblock titulo %}
+
+{% block contenido %}
+<h2>Agregar cliente</h2>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+    <input type="submit" value="Guardar">
+</form>
+
+{% endblock contenido %}

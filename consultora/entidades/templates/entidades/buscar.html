@@ -1,0 +1,20 @@
+{% extends 'entidades/index.html' %}
+
+{% block titulo %}
+<h1 class="display-5 fw-bolder text-white mb-2">Buscar</h1>
+<p class="lead text-white-50 mb-4"> Ingrese datos para su búsqueda</p>
+{% endblock titulo %}
+
+{% block contenido %}
+<h2>Buscar</h2>
+
+<form action="{% url 'encontrarClientes' %}" method="get">
+    {% csrf_token %}
+    <table>
+        <p>Ingrese su búsqueda: <input type="text" name="buscar" id="buscar"></p>
+    </table>
+    <input type="submit" value="Buscar">
+
+</form>
+
+{% endblock contenido %}

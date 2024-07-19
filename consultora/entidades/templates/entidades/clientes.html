@@ -1,0 +1,65 @@
+{% extends 'entidades/index.html' %}
+
+{% block titulo %}
+<h1 class="display-5 fw-bolder text-white mb-2">Clientes</h1>
+<p class="lead text-white-50 mb-4">IES busca satisfacer los requerimientos del cliente mediante un trato personalizado, con el objetivo de brindarle un servicio acorde a sus necesidades, a través del conocimiento de la problemática particular de cada sector o empresa.</p>
+{% endblock titulo %}
+
+{% block contenido %}
+
+<table>
+    <tr>
+        <td width="350"><h3>Agregar nuevos Clientes</h3></td> 
+        <td>
+            <a
+            href="{% url 'clienteForm' %}"
+            class="btn btn-primary btn-sm"
+            ><i class="fa fa-plus fa-lg" title="Crear"> </i>
+            </a>
+            <a class="btn btn-secondary" href="{% url 'buscarClientes' %}">Buscar Clientes</a>
+        </td>        
+    </tr>
+</table>
+
+<br> 
+
+<h2>Nuestros clientes</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Empresa</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for c in Cliente %}
+        <tr>
+            <td>{{ c.id }}</td>
+            <td>{{ c.nombre }}</td>
+            <td>{{ c.apellido }}</td>
+            <td>{{ c.email }}</td>
+            <td>{{ c.empresa }}</td>
+            <td>
+                <a
+                  href="{% url 'clienteUpdate' c.id %}"
+                  class="btn btn-primary"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                </a>
+                <a
+                  href="{% url 'clienteDelete' c.id %}"
+                  class="btn btn-danger"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                </a>                
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock contenido %}

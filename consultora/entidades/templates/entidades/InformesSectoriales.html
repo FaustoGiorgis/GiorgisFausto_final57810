@@ -1,0 +1,60 @@
+{% extends 'entidades/index.html' %}
+
+{% block titulo %}
+<h1 class="display-5 fw-bolder text-white mb-2">Informes Sectoriales</h1>
+<p class="lead text-white-50 mb-4">En IES Consultores analizamos el desempeño de una amplia variedad de sectores que componen la economía real argentina. Realizamos un seguimiento de su actualidad a través de los principales indicadores económicos y establecemos perspectivas sobre su evolución futura.</p>
+{% endblock titulo %}
+
+{% block contenido %}
+<table>
+    <tr>
+        <td width="350"><h3>Agregar nuevos Informes</h3></td> 
+        <td>
+            <a
+            href="{% url 'informesSectorialesForm' %}"
+            class="btn btn-primary btn-sm"
+            ><i class="fa fa-plus fa-lg" title="Crear"> </i>
+            </a>
+        </td>        
+    </tr>
+</table>
+<br> 
+
+<h2>Nuestros Informes Sectoriales</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Sector</th>
+            <th>¿Hay informes disponibles en 2024?</th>
+            <th>Última publicación</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for i in informesSectoriales  %}
+        <tr>
+            <td>{{ i.id }}</td>
+            <td>{{ i.sector }}</td>
+            <td>{{ i.informesDisponibles }}</td>
+            <td>{{ i.UltimaPublicacion }}</td>
+            <td>
+                <a
+                  href="{% url 'informesUpdate' i.id %}"
+                  class="btn btn-primary"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                </a>
+                <a
+                  href="{% url 'informesDelete' i.id %}"
+                  class="btn btn-danger"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                </a>                
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock contenido %}
