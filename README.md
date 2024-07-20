@@ -24,7 +24,7 @@ Credenciales de usuario administrador:
 
 usuario: admin 
 
-contraseña: 12345
+contraseña: 12345ies
 
 
 Casos de prueba: Dentro de la carpeta de la aplicación consultora se agrega un excel con 10 casos de prueba.
